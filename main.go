@@ -7,30 +7,42 @@ modification history
 package main
 
 import (
-	"flag"
 	"fmt"
 	"net/http"
 
 	"context"
 	"crypto/tls"
+	"flag"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
 type config struct {
-	port     int
-	certFile string
-	keyFile  string
+	port       int
+	certFile   string
+	keyFile    string
+	policyFile string
 }
 
-func main() {
-	var c config
+var c config
+
+func init() {
 	flag.IntVar(&c.port, "port", 443, "port")
 	flag.StringVar(&c.certFile, "tls-cert-file", "server.crt", "File containing the x509 Certificate for HTTPS.")
 	flag.StringVar(&c.keyFile, "tls-private-key-file", "server.key", "File containing the default x509 private key matching --tls-cert-file")
+	flag.StringVar(&c.policyFile, "policy-file", "policy.json", "File containing the policy file in one json object per line format")
 	flag.Parse()
+	if len(policys) == 0 {
+		var err error
+		policys, err = newPolicyListFromFile(c.policyFile)
+		if err != nil {
+			panic(fmt.Sprintf("read policy file %s error : %v", c.policyFile, err))
+		}
+	}
+}
 
+func main() {
 	pair, err := tls.LoadX509KeyPair(c.certFile, c.keyFile)
 	if err != nil {
 		fmt.Errorf("Failed to load key pair: %v", err)

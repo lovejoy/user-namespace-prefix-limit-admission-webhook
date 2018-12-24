@@ -1,0 +1,21 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+webhooks:
+- clientConfig:
+    caBundle: <you ca cert base64 here>
+    service:
+    url: /validate
+  failurePolicy: Fail
+  name: object-in-namespace-limit.k8s.io
+  namespaceSelector:
+    matchExpressions:
+    - {key: key, operator: In, values: [value]}
+  rules:
+  - apiGroups:
+    - '*'
+    apiVersions:
+    - '*'
+    operations:
+    - '*'
+    resources:
+    - "*/*"

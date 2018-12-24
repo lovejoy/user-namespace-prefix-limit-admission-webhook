@@ -45,7 +45,7 @@ type AdmissionRequest struct {
 	UserInfo UserInfo `json:"userInfo" protobuf:"bytes,8,opt,name=userInfo"`
 	// Object is the object from the incoming request prior to default values being applied
 	// +optional
-	//Object runtime.RawExtension `json:"object,omitempty" protobuf:"bytes,9,opt,name=object"`
+	Object MetaDataSpec `json:"object,omitempty" protobuf:"bytes,9,opt,name=object"`
 	// OldObject is the existing object. Only populated for UPDATE requests.
 	// +optional
 	//OldObject runtime.RawExtension `json:"oldObject,omitempty" protobuf:"bytes,10,opt,name=oldObject"`
@@ -109,6 +109,12 @@ func toAdmissionResponse(err error) *AdmissionResponse {
 	}
 }
 
+type MetaDataSpec struct {
+	MetaData MetaData `json:"metadata,omitempty"`
+}
+type MetaData struct {
+	Name string `json:"name,omitempty"`
+}
 type Status struct {
 	//TypeMeta `json:",inline"`
 	// Standard list metadata.
