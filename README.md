@@ -27,5 +27,7 @@ Modify the policy.json as you want
 
 Deploy the webhook on your way
 
-kubectl create the two ValidatingWebhookConfiguration  in this repo
+Edit all-object.yaml
+
+kubectl create -f all-object.yaml to create the  ValidatingWebhookConfiguration 
 
