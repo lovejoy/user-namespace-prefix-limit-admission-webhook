@@ -39,20 +39,25 @@ func namespacePrefixLimit(ar AdmissionReview) *AdmissionResponse {
 		return &reviewResponse
 	}
 
-	allowd := false
+	allowd := true
+	found := false
+	prefix := ""
 	for _, p := range policys {
+		if p.User == user {
+			found = true
+			prefix = p.NamespacePrefix
+		}
+
+	}
+	if found {
 		if ar.Request.Resource.Resource == "namespaces" {
-			if p.User == user && strings.HasPrefix(ar.Request.Object.MetaData.Name, p.NamespacePrefix) {
-				allowd = true
-				break
+			if !strings.HasPrefix(ar.Request.Object.MetaData.Name, prefix) {
+				allowd = false
 			}
 
+		} else if !strings.HasPrefix(ar.Request.Namespace, prefix) {
+			allowd = false
 		}
-		if p.User == user && strings.HasPrefix(ar.Request.Namespace, p.NamespacePrefix) {
-			allowd = true
-			break
-		}
-
 	}
 
 	if user == "admin" || strings.HasPrefix(user, "system:") {
