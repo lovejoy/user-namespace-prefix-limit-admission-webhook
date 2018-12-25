@@ -111,7 +111,7 @@ func serve(w http.ResponseWriter, r *http.Request, admit admitFunc) {
 			body = data
 		}
 	}
-	fmt.Printf("handling request: %v\n", string(body))
+	fmt.Printf("handling request: %v", string(body))
 
 	var reviewResponse *AdmissionResponse
 	ar := AdmissionReview{}
