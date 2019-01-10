@@ -1,0 +1,27 @@
+---
+# 设置需要的环境变量，不需要可以不写
+#envs:
+#  - name: 'name1' 这里是环境变量的名称
+#    value: 'value1' 这里是环境变量的值
+#  - name: 'name2' 用列表的方式来了设置多个值
+#    value: 'value2'
+
+# 设置编译的命令, 同环境变量的设置方式
+# 如:
+#cmds: 
+#  - name: 'do make'  步骤名称
+#    cmd: 'make' 真实的命令,如果不在PATH中，需要写全路径
+#  - name: 'do install'
+#    cmd: 'make install'
+cmds:
+  - name: 'list current dir'
+    cmd: 'ls && pwd && ls /'
+  - name: 'make output dir'
+    cmd: 'mkdir -p output/src'
+  - name: 'copy to output dir'
+    cmd: 'cp -r *.go output/src'
+  - name: 'build '
+    cmd: 'cd output && export GOPATH=$(pwd) CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o webhook user-namespace-prefix-limit-admission-webhook'
+
+# 抽包路径, 这个是必选项
+out_dir: 'output'
