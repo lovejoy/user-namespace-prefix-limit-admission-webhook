@@ -6,6 +6,7 @@ This webhook only allow user operator object in specific namespace-prefix namesp
 ## BUILD
 mkdir -p webhook/src && git clone https://github.com/lovejoy/user-namespace-prefix-limit-admission-webhook
 cd webhook  && export GOPATH=$(pwd)
+
 CGO_ENABLED=0 GOOS=linux go build  -a -installsuffix cgo -o webhook  user-namespace-prefix-limit-admission-webhook
 
 
