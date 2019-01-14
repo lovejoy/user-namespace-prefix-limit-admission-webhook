@@ -17,11 +17,11 @@ cmds:
   - name: 'list current dir'
     cmd: 'ls && pwd && ls /'
   - name: 'make output dir'
-    cmd: 'mkdir -p output/src'
+    cmd: 'mkdir -p output/src/webhook'
   - name: 'copy to output dir'
-    cmd: 'cp -r *.go output/src'
-  - name: 'build '
-    cmd: 'cd output && export GOPATH=$(pwd) CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o webhook user-namespace-prefix-limit-admission-webhook'
+    cmd: 'cp -r *.go output/src/webhook'
+  - name: 'build'
+    cmd: 'cd output && export GOPATH=$(pwd) CGO_ENABLED=0 GOOS=linux && go build -a -installsuffix cgo -o webhook webhook'
 
 # 抽包路径, 这个是必选项
 out_dir: 'output'
