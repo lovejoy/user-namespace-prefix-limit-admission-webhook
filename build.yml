@@ -21,9 +21,9 @@ cmds:
   - name: 'copy to output dir'
     cmd: 'cp -r types.go webhook.go main.go output/src/webhook'
   - name: 'cd'
-    cmd: 'cd output '
+    cmd: 'cd output'
   - name: 'export'
-    cmd: 'export GOPATH=$(pwd) '
+    cmd: 'export GOPATH=$(pwd)'
   - name: 'go'
     cmd: 'go build -a -installsuffix cgo -o webhook webhook'
 
