@@ -15,7 +15,7 @@
 #    cmd: 'make install'
 cmds:
   - name: 'list current dir'
-    cmd: 'ls && pwd && ls /'
+    cmd: 'ls'
   - name: 'make output dir'
     cmd: 'mkdir -p output/src/webhook'
   - name: 'copy to output dir'
