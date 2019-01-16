@@ -23,7 +23,7 @@ cmds:
   - name: 'cd'
     cmd: 'cd output'
   - name: 'go'
-    cmd: 'export GOPATH=$(pwd) && go build -a -installsuffix cgo -o webhook webhook'
+    cmd: 'export GOPATH=$(pwd) &&  cd src/webhook && pwd && ls &&  go build -a -installsuffix cgo -o webhook .'
 
 # 抽包路径, 这个是必选项
 out_dir: 'output'
