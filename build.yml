@@ -20,10 +20,8 @@ cmds:
     cmd: 'mkdir -p output/src/webhook'
   - name: 'copy to output dir'
     cmd: 'cp -r types.go webhook.go main.go output/src/webhook'
-  - name: 'cd'
-    cmd: 'cd output'
   - name: 'go'
-    cmd: 'export GOPATH=$(pwd) &&  cd src/webhook && pwd && ls &&  go build -a -installsuffix cgo -o webhook .'
+    cmd: 'cd output && export GOPATH=$(pwd) &&  pwd && ls &&  go build -a -installsuffix cgo -o webhook webhook'
 
 # 抽包路径, 这个是必选项
 out_dir: 'output'
